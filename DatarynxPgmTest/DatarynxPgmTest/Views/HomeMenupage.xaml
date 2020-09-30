@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="HomeMenuPage" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DatarynxPgmTest.Views.HomeMenupage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="lblStyle1" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Padding" Value="25,10,0,10"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ListView x:Name="lstItemsView"
+                      VerticalOptions="FillAndExpand"
+              
+                      ItemTapped="Handle_ItemTapped"
+                      ItemSelected="lstItemsView_ItemSelected"
+            ItemsSource="{Binding options}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding Title}"  Style="{StaticResource lblStyle1}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

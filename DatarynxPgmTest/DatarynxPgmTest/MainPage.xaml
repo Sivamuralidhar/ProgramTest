@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:converter="clr-namespace:DatarynxPgmTest.Converters"
+             BackgroundColor="White"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DatarynxPgmTest.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="lblStyle1" TargetType="Label">
+                <Setter Property="TextColor" Value="DimGray"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+            <Style x:Key="lblStyle2" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style x:Key="lblStyle3" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style x:Key="btnStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="#1976D2"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="CornerRadius" Value="05"/>
+            </Style>
+            <Style x:Key="pickerLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#1976D2"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+
+            <Style x:Key="headerLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <converter:StringToBoolConverter x:Key="ConvertStringToBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+            <Label Text="To-Do List"
+                 Style="{StaticResource headerLabel}"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" Padding="15,10,15,10">
+            <Label Style="{StaticResource lblStyle1}" VerticalOptions="Center" Text="Sort by"></Label>
+            <Label Style="{StaticResource pickerLabel}" VerticalTextAlignment="Center" Text="BDD" />
+            <Label x:Name="lblCount" HorizontalOptions="End" VerticalTextAlignment="Center" />
+        </StackLayout>
+        <ListView ItemsSource="{Binding Items}"
+              CachingStrategy="RecycleElement"
+                  
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  x:Name="lstItems"
+                  ItemSelected="lstItems_ItemSelected"
+                  ItemTapped="Handle_ItemTapped">
+
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="15,0,10,10">
+                            <Frame BackgroundColor="#f6f6f6" CornerRadius="10">
+                                <Grid ColumnSpacing="0" RowSpacing="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition  Width="Auto" />
+                                        <ColumnDefinition  Width="Auto" />
+                                        <ColumnDefinition  Width="2*" />
+                                        <ColumnDefinition  Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0"  Style="{StaticResource lblStyle1}" Text="{Binding WeekNo}"/>
+                                    <Label Grid.Row="1" Grid.Column="0"  Style="{StaticResource lblStyle1}" Text="{Binding WeekDate}" />
+                                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource lblStyle2}" Text="{Binding StoreName}" />
+                                    <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource lblStyle3}" Text="{Binding StoreAddress}" />
+                                    <Label Grid.Row="4" Grid.Column="0" />
+                                    <Label Grid.Row="5" Grid.Column="0"  VerticalOptions="Center" Style="{StaticResource lblStyle1}" Text="{Binding CodingType}" />
+                                    <BoxView Grid.Row="5" Grid.Column="1" HorizontalOptions="FillAndExpand"/>
+                                    <Button Grid.Row="5" Grid.Column="2" IsVisible="{Binding TaskState, Converter={StaticResource ConvertStringToBool}}" Style="{StaticResource btnStyle}" HorizontalOptions="EndAndExpand" Text="Start Audit"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                        <!--<StackLayout Margin="8">
+                            <Label Text="{Binding StoreName}"
+                               FontAttributes="Bold" />
+                            <Label Text="{Binding StoreAddress}" />
+                        </StackLayout>-->
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+</ContentPage>
